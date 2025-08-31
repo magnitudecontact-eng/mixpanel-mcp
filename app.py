@@ -11,10 +11,6 @@ def root():
 def health_alt():
     return {"ok": True}
 
-@app.get("/healthz")
-def health():
-    return {"ok": True}
-
 @app.post("/tools/search")
 async def tools_search(payload: dict):
     event = payload.get("event")
