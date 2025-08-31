@@ -3,6 +3,14 @@ import os, uuid
 
 app = FastAPI(title="Mixpanel MCP Bridge (stub)")
 
+@app.get("/")
+def root():
+    return {"ok": True, "service": "mixpanel-mcp"}
+
+@app.get("/health")
+def health_alt():
+    return {"ok": True}
+
 @app.get("/healthz")
 def health():
     return {"ok": True}
