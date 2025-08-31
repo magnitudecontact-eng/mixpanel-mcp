@@ -1,19 +1,14 @@
-
-# Python slim image
 FROM python:3.11-slim
 
 WORKDIR /app
+ENV PYTHONUNBUFFERED=1
 
-# Install dependencies
-COPY requirements.txt ./
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy app
-COPY app.py ./
+COPY . .
 
-# Health check (optional)
-HEALTHCHECK CMD curl -f http://localhost:${PORT:-8080}/healthz || exit 1
-
-# Run
 ENV PORT=8080
-CMD ["bash", "-lc", "uvicorn app:app --host 0.0.0.0 --port ${PORT}"]
+EXPOSE 8080
+
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8080"]
